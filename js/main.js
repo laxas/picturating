@@ -1,7 +1,16 @@
+function lget(key){
+    return JSON.parse(localStorage.getItem(key));
+};
+
+function lset(key, object){
+    localStorage.setItem(key, JSON.stringify(object));
+};
+
+
 var nr = 1967;
 
-console.log(screen.width);
-console.log(screen.height);
+//~ console.log(screen.width);
+//~ console.log(screen.height);
 
 var hight = window.innerHeight - 30; 
 var width = hight/0.75
@@ -9,6 +18,13 @@ var width = hight/0.75
 $("#picture img").attr("height", hight);
 $("#picture img").attr("width", width);
 
+$.getJSON("demo/init.json", function(data) {
+    lset( "data", data );
+});
+
+for (picture in lget("data")) { 
+    console.log(picture)
+};
 
 $("body").keypress(function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
